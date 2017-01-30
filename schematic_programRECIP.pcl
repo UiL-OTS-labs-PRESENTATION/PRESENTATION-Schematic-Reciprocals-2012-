@@ -1,0 +1,461 @@
+# compute block 1 of trials (18 verbs, 5 trial types, 3 verbs/trial type)
+array<int> verbtrialcombo1[18][2];
+loop int k = 1; int i = 1 until i > 5 begin
+	loop int j = 1 until j > 3 begin
+		verbtrialcombo1[k][1] = k;
+		verbtrialcombo1[k][2] = i;
+		k = k + 1;
+		j = j + 1;
+	end;
+	i = i + 1;
+end;
+verbtrialcombo1[16][1] = 16;
+verbtrialcombo1[16][2] = 1;
+verbtrialcombo1[17][1] = 17;
+verbtrialcombo1[17][2] = 2;
+verbtrialcombo1[18][1] = 18;
+verbtrialcombo1[18][2] = 5;
+
+# compute block 2 of trials, shifted +1 from block 1 (18 verbs, 5 trial types, 3 verbs/trial type) 
+array<int> verbtrialcombo2[18][2];
+loop int k = 1; int i = 1 until i > 5 begin
+	loop int j = 1 until j > 3 begin
+		verbtrialcombo2[k][1] = k;
+		if i == 1 then
+			verbtrialcombo2[k][2] = 5;
+		else
+			verbtrialcombo2[k][2] = i-1;
+		end;
+		k = k + 1;
+		j = j + 1;
+	end;
+	i = i + 1;
+end;
+verbtrialcombo2[16][1] = 16;
+verbtrialcombo2[16][2] = 2;
+verbtrialcombo2[17][1] = 17;
+verbtrialcombo2[17][2] = 1;
+verbtrialcombo2[18][1] = 18;
+verbtrialcombo2[18][2] = 4;
+
+# compute block 3 of trials, shifted +1 from block 2 (18 verbs, 5 trial types, 3 verbs/trial type) 
+array<int> verbtrialcombo3[18][2];
+loop int k = 1; int i = 1 until i > 5 begin
+	loop int j = 1 until j > 3 begin
+		verbtrialcombo3[k][1] = k;
+		if i < 3 then
+			verbtrialcombo3[k][2] = i+3;
+		else
+			verbtrialcombo3[k][2] = i-2;
+		end;
+		k = k + 1;
+		j = j + 1;
+	end;
+	i = i + 1;
+end;
+verbtrialcombo3[16][1] = 16;
+verbtrialcombo3[16][2] = 3;
+verbtrialcombo3[17][1] = 17;
+verbtrialcombo3[17][2] = 5;
+verbtrialcombo3[18][1] = 18;
+verbtrialcombo3[18][2] = 2;
+
+# compute block 4 of trials, shifted +1 from block 3 (18 verbs, 5 trial types, 3 verbs/trial type) 
+array<int> verbtrialcombo4[18][2];
+loop int k = 1; int i = 1 until i > 5 begin
+	loop int j = 1 until j > 3 begin
+		verbtrialcombo4[k][1] = k;
+		if i < 4 then
+			verbtrialcombo4[k][2] = i+2;
+		else
+			verbtrialcombo4[k][2] = i-3;
+		end;
+		k = k + 1;
+		j = j + 1;
+	end;
+	i = i + 1;
+end;
+verbtrialcombo4[16][1] = 16;
+verbtrialcombo4[16][2] = 4;
+verbtrialcombo4[17][1] = 17;
+verbtrialcombo4[17][2] = 3;
+verbtrialcombo4[18][1] = 18;
+verbtrialcombo4[18][2] = 1;
+
+# compute block 5 of trials, shifted +1 from block 4(18 verbs, 5 trial types, 3 verbs/trial type) 
+array<int> verbtrialcombo5[18][2];
+loop int k = 1; int i = 1 until i > 5 begin
+	loop int j = 1 until j > 3 begin
+		verbtrialcombo5[k][1] = k;
+		if i < 5 then
+			verbtrialcombo5[k][2] = i+1;
+		else
+			verbtrialcombo5[k][2] = i-4;
+		end;
+		k = k + 1;
+		j = j + 1;
+	end;
+	i = i + 1;
+end;
+verbtrialcombo5[16][1] = 16;
+verbtrialcombo5[16][2] = 5;
+verbtrialcombo5[17][1] = 17;
+verbtrialcombo5[17][2] = 4;
+verbtrialcombo5[18][1] = 18;
+verbtrialcombo5[18][2] = 3;
+
+# pseudorandom lists of trialtypes
+array<int> trials_list1[verbtrialcombo1.count()] = {
+13,4,16,14,8,17,11,5,9,3,10,1,6,7,15,2,12,18
+};
+array<int> trials_list2[verbtrialcombo2.count()] = {
+17,10,4,16,13,12,8,14,7,5,1,11,9,3,18,2,15,6
+};
+array<int> trials_list3[verbtrialcombo3.count()] = {
+15,5,12,2,6,16,4,11,8,18,7,13,10,9,1,17,3,14
+};
+array<int> trials_list4[verbtrialcombo4.count()] = {
+4,17,5,3,6,9,10,15,11,13,18,1,8,14,7,2,12,16
+};
+array<int> trials_list5[verbtrialcombo5.count()] = {
+1,17,15,11,6,16,13,18,12,2,10,8,14,7,5,9,4,3
+};
+
+# create a list with trial numbers
+array<int> trials_list[5][18];
+trials_list[1] = trials_list1;
+trials_list[2] = trials_list2;
+trials_list[3] = trials_list3;
+trials_list[4] = trials_list4;
+trials_list[5] = trials_list5;
+
+# create an array with all verb trial combinations
+array<int> verbtrialcombo[5][18][2];
+verbtrialcombo[1] = verbtrialcombo1;
+verbtrialcombo[2] = verbtrialcombo2;
+verbtrialcombo[3] = verbtrialcombo3;
+verbtrialcombo[4] = verbtrialcombo4;
+verbtrialcombo[5] = verbtrialcombo5;
+
+# array with nrs of the blocks to randomize
+array <int> blocks[5] = {
+1,2,3,4,5};
+blocks.shuffle();
+
+# array with trialnrs of the practice trials
+array <int> practice[5] = {
+1,2,3,4,5};
+practice.shuffle();
+
+# list of variables for placement of arrows
+int var_shift_x = 30;
+int var_shift_y = 50;
+int var_hor = display_device.width();
+int var_vert = display_device.height();
+int var_x = var_hor/4;
+int var_y = var_vert/6;
+int var_x_half = var_x/2;
+int llinstr = 0-var_x-var_shift_x;
+#int lr = 0-var_x+var_shift_x;
+int ll = 0-var_shift_x;
+int lr = 0+var_shift_x;
+int rl = 0+var_x-var_shift_x;
+int rr = 0+var_x+var_shift_x;
+int ll_name_instr = 0-var_x-var_x_half;
+int lr_name_instr = 0-var_x_half;
+int ll_name = 0-var_x_half;
+int lr_name = 0+var_x_half;
+int rl_name = 0+var_x_half;
+int rr_name = 0+var_x+var_x_half;
+int y_name = 0-var_shift_y-var_y-var_shift_y;
+#int y_name = 0-var_shift_y;
+int lx_male_instr = 0-var_x; 
+int lx_male = 0; 
+int rx_male = 0+var_x;
+int ly_male = var_y+var_shift_y-var_shift_y;
+#int ly_male = var_y+var_y+var_shift_y;
+int shift_y_inst = var_vert/4;
+
+
+# array of references to arrow combinations
+array <int> schema1[5][7] = {
+{3,2,6,4,11,10,1}, #weak clockwise
+{1,2,4,5,9,10,2}, #strong
+{3,2,6,6,11,10,3}, #control1
+{3,2,4,5,11,10,4}, #control2
+{3,2,4,5,9,10,5}};#control3
+array <int> schema2[5][7] = {
+{3,2,6,4,11,10,1}, 
+{1,2,4,5,9,10,2}, 
+{3,3,6,4,11,10,3},
+{1,2,6,4,11,10,4},
+{1,2,6,4,9,10,5}};
+array <int> schema3[5][7] = {
+{3,1,6,5,11,9,1}, #weak counterclockwise
+{1,2,4,5,9,10,2}, 
+{3,3,6,5,11,9,3},
+{1,2,6,5,11,9,4},
+{1,2,6,5,9,10,5}};
+array <int> schema4[5][7] = {
+{3,1,6,5,11,9,1}, 
+{1,2,4,5,9,10,2}, 
+{3,1,6,6,11,9,3},
+{3,1,4,5,11,9,4},
+{3,1,4,5,9,10,5}};
+
+# Deze 2 arrays worden gebruikt om de volgorde van de blokken vast te leggen
+array<int> schemas[4][5][7];
+schemas[1] = schema1;
+schemas[2] = schema2;
+schemas[3] = schema3;
+schemas[4] = schema4;
+
+# compute array of orders [1,2,3,4,1,2,3,4, etc]
+array<int> schemacombo[18];
+loop int k = 1; int i = 1 until i > 4 begin #nr of verbs/arrowscheme
+	loop int j = 1 until j > 4 begin #nr of arrowschemes
+		schemacombo[k] = j;
+#      term.print_line("ordercombo " + string(ordercombo[k]));
+		k = k + 1;
+		j = j + 1;
+	end;
+	i = i + 1;
+end;
+schemacombo[17] = 1;
+schemacombo[18] = 3;
+
+# present insctruction 1
+instruction_trial1.present();
+
+# add all the relevant bitmaps and arrows to explain the configuration
+pic2.add_part( versiert1,llinstr,shift_y_inst+var_shift_y); #left picture
+pic2.add_part( versiert2,rr,shift_y_inst+var_shift_y); #left picture
+pic2.add_part( A,-var_x,shift_y_inst/2); #A
+pic2.add_part( B,var_x,shift_y_inst/2); #B/*
+
+arrow_graphic arrow1 = new arrow_graphic;
+arrow1.set_coordinates( 0.0,60.0, -70.0,-60.0 );
+arrow1.set_line_width(5.0);
+arrow1.set_head_width( 20.0 );
+arrow1.set_head_length( 20.0 );
+arrow1.set_head_type(head_swift);
+arrow1.redraw();
+#pic2.add_part( arrow1,ll,-var_y ); #left scheme, left arrow
+pic2.add_part( arrow1,llinstr,-var_y-var_shift_y-var_shift_x ); #left scheme, left arrow
+#pic2.add_part( arrow1,rl,-var_y ); #right scheme, left arrow
+pic2.add_part( arrow1,rl,-var_y-var_shift_y-var_shift_x ); #right scheme, left arrow
+
+arrow_graphic arrow2 = new arrow_graphic;
+arrow2.set_coordinates( 0.0,60.0, 70.0,-60.0 );
+arrow2.set_line_width(5.0);
+arrow2.set_head_width( 20.0 );
+arrow2.set_head_length( 20.0 );
+arrow2.set_head_type(head_swift);
+arrow2.redraw();
+
+
+#pic2.add_part( arrow2,rr,-var_y ); #right scheme, right arrow
+pic2.add_part( arrow2,rr,-var_y-var_shift_y-var_shift_x ); #right scheme, right arrow
+#pic2.add_part( instnames1,ll_name,y_name-shift_y_inst); #left scheme, left name
+#pic2.add_part( instnames2,lr_name,y_name-shift_y_inst); #left scheme, right name
+pic2.add_part( instnames1,ll_name_instr,0-var_shift_y-shift_y_inst-var_shift_y); #left scheme, left name
+pic2.add_part( instnames2,lr_name_instr,0-var_shift_y-shift_y_inst-var_shift_y); #left scheme, right name
+#pic2.add_part( instnames1,rl_name,y_name-shift_y_inst); #right scheme, left name
+#pic2.add_part( instnames2,rr_name,y_name-shift_y_inst); #right scheme, right name
+pic2.add_part( instnames1,rl_name,0-var_shift_y-shift_y_inst-var_shift_y); #right scheme, left name
+pic2.add_part( instnames2,rr_name,0-var_shift_y-shift_y_inst-var_shift_y); #right scheme, right name
+#pic2.add_part( instnames3,lx_male,-var_shift_x); #left scheme, top name
+pic2.add_part( instnames3,lx_male_instr,-var_shift_y-var_shift_y-var_shift_x); #left scheme, top name
+#pic2.add_part( instnames3,rx_male,-var_shift_x); #right scheme, top name
+pic2.add_part( instnames3,rx_male,-var_shift_y-var_shift_y-var_shift_x); #right scheme, top name
+A.set_font_size(20);
+A.redraw();
+B.set_font_size(20);
+B.redraw();
+#pic2.add_part( A,-var_x,-var_y-var_shift_y-shift_y_inst/2); #A
+pic2.add_part( A,-var_x,-var_y-shift_y_inst); #A
+#pic2.add_part( B,var_x,-var_y-var_shift_y-shift_y_inst/2); #B/*
+pic2.add_part( B,var_x,-var_y-shift_y_inst); #B/*
+#pic2.add_part(vers,0,-var_shift_y);
+#pic2.add_part(vers,0,-var_y/2-var_shift_y-shift_y_inst);
+
+# present insctruction 2
+instruction_trial2.present();
+
+pic2b.add_part( arrow1,ll,var_y ); #left scheme, left arrow
+pic2b.add_part( instnames1,ll_name,var_shift_x); #left scheme, left name
+pic2b.add_part( instnames2,lr_name,var_shift_x); #left scheme, right name
+pic2b.add_part( instnames3,lx_male,var_y+var_y-var_shift_x); #left scheme, top name
+pic2b.add_part(vers,0,var_x+var_shift_y);
+#pic2b.add_part(vers,0,0-var_shift_y);
+
+# present insctruction 2b
+instruction_trial2b.present();
+
+# present insctruction 2c
+instruction_trial2c.present();
+
+# present insctruction 3
+instruction_trial3.present();
+
+# presenteer de 1e set oefentrials 
+loop int a = 1 until a > 5 begin
+	int verbnr = practice[a]; #pick the verbnr (1:5)
+	string verb = sentencesprac[verbnr].description(); #pick the verb
+	int trialtypenr = verbnr; #pick the trial type nr (1:5)
+	array<int> arrowschema[6];
+	arrowschema = schemas[1][verbnr]; #pick the arrow scheme for 2 arrows
+	term.print_line("block prac trial "+string(a)+" verbnr "+string(verbnr));
+#	term.print( "part count " + string( sent.part_count() ) + "\n" );
+	
+	fix.set_event_code( "fix;"+string(a) );
+	fixation_trial.present();
+	
+	event0.set_event_code( "verb;"+string(a) );
+	sent0.set_part(1,sentencesprac[verbnr]);
+	sent0.set_part_y(1,var_y+var_y);
+	verb_trial.present();
+	
+		if (a == 1) then
+		# compute the very first trial
+		event1.set_event_code( verb+";"+string(a)+";"+string(verbnr)+";"+string(trialtypenr)+";"+string(arrowschema[1])+";"+string(arrowschema[2])+";"+string(arrowschema[3]));
+		sent.set_part(1,sentencesprac[verbnr]);
+		sent.set_part_y(1,var_y+var_y); #position verb
+		sent.add_part( arrows[arrowschema[1]],ll,0-var_shift_y ); #left arrow
+		sent.add_part( arrows[arrowschema[2]],ll,0-var_shift_y ); #left arrow
+		sent.add_part( arrows[arrowschema[3]],lr,0-var_shift_y ); #right arrow	
+		sent.add_part( arrows[arrowschema[4]],lr,0-var_shift_y ); #right arrow
+		sent.add_part( arrows[arrowschema[5]],0,0-var_shift_y-var_shift_x); #horizontal arrow
+		sent.add_part( arrows[arrowschema[6]],0,0-var_shift_y-var_shift_x); #horizontal arrow
+		sent.add_part( names1prac[verbnr],ll_name,y_name); #left name in schema
+		#sent.add_part( names1prac[verbnr],0, var_y+var_y); #left name in sentence
+		sent.add_part( names2prac[verbnr],lr_name,y_name); #right name
+		#sent.add_part( names2prac[verbnr],0, var_y+var_y); #right name in sentence
+		sent.add_part( names3prac[verbnr],lx_male,ly_male); #top name
+		#sent.add_part( names3prac[verbnr],0, var_y+var_y); #top name in sentence
+		main_trial.present();
+	else
+		event1.set_event_code( verb+";"+string(a)+";"+string(verbnr)+";"+string(trialtypenr)+";"+string(arrowschema[1])+";"+string(arrowschema[2])+";"+string(arrowschema[3]));
+		sent.set_part(1,sentencesprac[verbnr]);
+		sent.set_part_y(1,var_y+var_y); #position verb
+		sent.set_part(2, arrows[arrowschema[1]]); #left arrow
+		sent.set_part(3, arrows[arrowschema[2]]); #left arrow
+		sent.set_part(4, arrows[arrowschema[3]]); #right arrow
+		sent.set_part(5, arrows[arrowschema[4]]); #right arrow
+		sent.set_part(6, arrows[arrowschema[5]]); #horizontal arrow
+		sent.set_part(7, arrows[arrowschema[6]]); #horizontal arrow
+		sent.set_part(8, names1prac[verbnr]); #left scheme, left name
+		#sent.set_part(9, names1prac[verbnr]); #left scheme, left name
+		sent.set_part(9, names2prac[verbnr]); #left scheme, right name
+		sent.set_part(10, names3prac[verbnr]); #left scheme, top name
+		main_trial.present();
+	end;
+	a = a + 1;
+end;
+
+# present the final instruction
+instruction_trial4.present();
+
+# presenteer de 2e set oefentrials
+practice.shuffle();
+loop int c = 1 until c > 5 begin
+	int verbnr = practice[c]; #pick the verbnr (1:5)
+	string verb = sentencesprac[verbnr].description(); #pick the verb
+	int trialtypenr = verbnr; #pick the trial type nr (1:5)
+	array<int> arrowschema2[6];
+	arrowschema2 = schemas[3][verbnr]; #pick the arrow scheme for 3 arrows
+	term.print_line("block prac trial "+string(c)+" verbnr "+string(verbnr));
+	#term.print( "part count " + string( sent.part_count() ) + "\n" );
+	
+	fix.set_event_code( "fix;"+string(c) );
+	fixation_trial.present();
+	
+	sent0.set_part(1,sentencesprac[verbnr]);
+	sent0.set_part_y(1,var_y+var_y);
+	verb_trial.present();
+	
+		event1.set_event_code( verb+";"+string(c)+";"+string(verbnr)+";"+string(trialtypenr)+";"+string(arrowschema2[1])+";"+string(arrowschema2[2])+";"+string(arrowschema2[3]));
+		sent.set_part(1,sentencesprac[verbnr]);
+		sent.set_part_y(1,var_y+var_y); #position verb
+		sent.set_part(2, arrows[arrowschema2[1]]); #left arrow
+		sent.set_part(3, arrows[arrowschema2[2]]); #left arrow
+		sent.set_part(4, arrows[arrowschema2[3]]); #right arrow
+		sent.set_part(5, arrows[arrowschema2[4]]); #right arrow
+		sent.set_part(6, arrows[arrowschema2[5]]); #horizontal arrow
+		sent.set_part(7, arrows[arrowschema2[6]]); #horizontal arrow
+		sent.set_part(8, names1prac[verbnr]); #left scheme, left name
+		sent.set_part(9, names2prac[verbnr]); #left scheme, right name
+		sent.set_part(10, names3prac[verbnr]); #left scheme, top name
+		main_trial.present();
+	c = c + 1;
+end;
+
+# present the final instruction
+instruction_trial5.present();
+
+
+sub
+   presentLong( string caption )
+begin
+   text1.set_caption( caption );
+   text1.redraw();  
+   trial2.present()
+end;
+
+
+# presenteer de trial
+loop int b = 1 until b > 5 begin #5 lists
+	loop int v = 1 until v > sentences.count() begin #18 begin 
+		if ((v == 1)&&(b == 4)) then
+			presentLong("Dit was het einde van blok 1.");
+			pauze_trial.present();
+		elseif ((v == 1)&&(b == 6)) then
+			presentLong("Dit was het einde van blok 2.");
+			pauze_trial.present();
+		end;
+#		term.print( "part count " + string( sent.part_count() ) + "\n" );
+		int blocknr = blocks[b]; #pick the randomized blocknumber
+		#int trialnr = trials_list[blocknr][v]; #pick the randomized trialnumber
+		int verbnr = trials_list[blocknr][v]; #pick the randomized verbnumber
+		#int trialnr = trials_list[blocknr][v]; #pick the randomized verbnumber
+		#term.print_line("blocknr "+string(blocknr)+" v "+string(v)+" trialnr "+string(trialnr));
+		#int verbnr2 = verbtrialcombo[blocknr][trialnr][1]; #pick the verbnr (1:18)
+		string verb = sentences[verbnr].description(); #pick the verb
+		int trialtypenr = verbtrialcombo[blocknr][verbnr][2]; #pick the trial type nr (1:5)
+		int schemanr = schemacombo[v]; #pick the schema of arrows
+		term.print_line("schemanr "+string(schemanr)+" trialtypenr "+string(trialtypenr));
+		#term.print_line(" verbnr "+string(verbnr)+" verbnr2 "+string(verbnr2));
+		array<int> arrowschema[6];
+		arrowschema = schemas[schemanr][trialtypenr]; #pick the arrow scheme for 2 arrows
+		term.print_line("block "+string(b)+" blocknr "+string(blocknr)+" trial "+string(v)+" verbnr "+string(verbnr));
+		
+		fix.set_event_code( "fix;"+string(b)+";"+string(v) );
+		fixation_trial.present();
+		
+		sent0.set_part(1,sentences[verbnr]);
+		#text0.set_caption(sentences[verbnr]);
+		#text0.set_font_color(135,206,250); 
+		text0.redraw();
+		sent0.set_part_y(1,var_y+var_y);
+		verb_trial.present();
+				
+			event1.set_event_code( verb+";"+string(v)+";"+string(b)+";"+string(blocknr)+";"+string(verbnr)+";"+string(trialtypenr)+";"+string(arrowschema[1])+";"+string(arrowschema[2])+";"+string(arrowschema[3])+";"+string(arrowschema[4]));
+			sent.set_part(1,sentences[verbnr]);
+			sent.set_part_y(1,var_y+var_y);
+			sent.set_part(2, arrows[arrowschema[1]]); #left arrow
+			sent.set_part(3, arrows[arrowschema[2]]); #left arrow
+			sent.set_part(4, arrows[arrowschema[3]]); #right arrow
+			sent.set_part(5, arrows[arrowschema[4]]); #right arrow
+			sent.set_part(6, arrows[arrowschema[5]]); #horizontal arrow
+			sent.set_part(7, arrows[arrowschema[6]]); #horizontal arrow
+			sent.set_part(8, names1[verbnr]); #left scheme, left name
+			sent.set_part(9, names2[verbnr]); #left scheme, right name
+			sent.set_part(10, names3[verbnr]); #left scheme, top name
+			main_trial.present();
+
+		v = v + 1;
+	end;
+	b = b + 1;
+end;
+
+einde_trial.present();
